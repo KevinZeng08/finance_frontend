@@ -6,7 +6,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://gmall-h5-api.atguigu.cn',   //数据来源服务器
+        target: 'http://101.132.227.96',   //数据来源服务器
         // pathRewrite: { '^/api': '' }, //路径重写
       },
     },
