@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <CommonHeader></CommonHeader>
-    <CommonAside></CommonAside>
+    <Admin />
   </div>
 </template>
 
 <script>
-import CommonHeader from './components/CommonHeader.vue'
-import CommonAside from './components/CommonAside.vue'
+import Admin from '@/pages/Admin.vue'
+
 export default {
   name: 'App',
   components: {
-    CommonHeader, CommonAside
+    Admin
   }
 }
 </script>
