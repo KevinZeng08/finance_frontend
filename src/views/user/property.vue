@@ -4,7 +4,10 @@
       <!-- form搜索区域 -->
       <el-form :inline="true" :model="propertySearchForm">
         <el-form-item>
-          <el-input placeholder="请输入资产名称" v-model="propertySearchForm.name"></el-input>
+          <el-input
+            placeholder="请输入资产名称"
+            v-model="propertySearchForm.name"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="searchProperty">查询</el-button>
@@ -27,7 +30,10 @@
         label-width="80px"
       >
         <el-form-item label="买入金额" prop="amount">
-          <el-input placeholder="请输入买入金额" v-model="buyForm.amount"></el-input>
+          <el-input
+            placeholder="请输入买入金额"
+            v-model="buyForm.amount"
+          ></el-input>
         </el-form-item>
       </el-form>
 
@@ -52,7 +58,10 @@
         label-width="80px"
       >
         <el-form-item label="卖出金额" prop="amount">
-          <el-input placeholder="请输入卖出金额" v-model="sellForm.amount"></el-input>
+          <el-input
+            placeholder="请输入卖出金额"
+            v-model="sellForm.amount"
+          ></el-input>
         </el-form-item>
       </el-form>
 
@@ -93,7 +102,7 @@
 export default {
   data() {
     return {
-        //table
+      //table
       tableData: [
         {
           id: 1,
@@ -109,12 +118,12 @@ export default {
         name: "",
       },
       //buy
-      buyFormVisible : false,
+      buyFormVisible: false,
       buyForm: {
         amount: 100,
       },
       //sell
-      sellFormVisible : false,
+      sellFormVisible: false,
       sellForm: {
         amount: 100,
       },
@@ -123,45 +132,55 @@ export default {
         amount: [
           { required: true, message: "请输入买入金额", trigger: "blur" },
         ],
-      }
+      },
     };
   },
   methods: {
     //search
     searchProperty() {
-      console.log(this.propertySearchForm.name)
+      console.log(this.propertySearchForm.name);
     },
     //buy
     handleBuy(property) {
-        this.buyFormVisible = true
-        this.property = property
+      this.buyFormVisible = true;
+      this.property = property;
     },
-    handleBuyClose(){
-        this.$refs['form'].resetFields()
-        this.buyFormVisible = false
+    handleBuyClose() {
+      this.$refs["form"].resetFields();
+      this.buyFormVisible = false;
     },
     buy() {
-        //向后端发送请求
-        console.log("buy " + this.buyForm.amount)
-        console.log(this.property)
+      //向后端发送请求
+      console.log("buy " + this.buyForm.amount);
+      console.log(this.property);
+
+      //刷新资产列表
+      this.getPropertyList();
     },
     //sell
     handleSell(property) {
-        this.sellFormVisible = true
-        this.property = property
+      this.sellFormVisible = true;
+      this.property = property;
     },
-    handleSellClose(){
-        this.$refs['form'].resetFields()
-        this.sellFormVisible = false
+    handleSellClose() {
+      this.$refs["form"].resetFields();
+      this.sellFormVisible = false;
     },
     sell() {
-        //向后端发送卖出请求
-        console.log("sell " + this.sellForm.amount)
-        console.log(this.property)
+      //向后端发送卖出请求
+      console.log("sell " + this.sellForm.amount);
+      console.log(this.property);
+
+      //刷新资产列表
+      this.getPropertyList();
     },
 
+    //向后端请求指定用户资产列表
+    getPropertyList() {},
+  },
 
-
+  mounted() {
+    this.getPropertyList();
   },
 };
 </script>

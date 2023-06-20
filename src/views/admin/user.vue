@@ -8,15 +8,17 @@
           <el-input placeholder="请输入名称" v-model="userForm.name"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
+          <el-button type="primary" @click="search">查询</el-button>
         </el-form-item>
       </el-form>
     </div>
     <template>
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="idCard" label="身份证号" width="180">
+        <el-table-column prop="id_card" label="身份证号" width="180">
         </el-table-column>
         <el-table-column prop="name" label="姓名" width="180">
+        </el-table-column>
+        <el-table-column prop="bank_card" label="银行卡号" width="180">
         </el-table-column>
         <el-table-column prop="phone" label="手机号"> </el-table-column>
         <el-table-column prop="type" label="类型"> </el-table-column>
@@ -46,9 +48,10 @@ export default {
       tableData: [
         {
           id: 1,
-          idCard: "2016-05-02",
+          id_card: "9841998189",
+          bank_card: "1969198189",
           name: "王小虎",
-          phone: "上海市普陀区金沙江路 1518 弄",
+          phone: "1915195230",
           type: "高端用户",
         },
       ],
@@ -71,10 +74,22 @@ export default {
       )
     },
 
+    search(){
+
+    },
+
     handleDelete (index, row) {
       console.log(index, row)
     },
+
+    getUserList() {
+
+    }
   },
+
+  mounted(){
+    this.getUserList()
+  }
 };
 </script>
 

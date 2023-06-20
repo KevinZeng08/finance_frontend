@@ -4,40 +4,13 @@
         <!-- form搜索区域 -->
         <el-form :inline="true" :model="insuranceSearchForm">
           <el-form-item>
-            <el-input placeholder="请输入保险名称" v-model="insuranceSearchForm.name"></el-input>
+            <el-input placeholder="请输入基金名称" v-model="insuranceSearchForm.name"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="searchInsurance">查询</el-button>
           </el-form-item>
         </el-form>
       </div>
-      <el-dialog
-        title="理财产品买入"
-        :visible.sync="buyFormVisible"
-        width="30%"
-        :before-close="handleBuyClose"
-      >
-        <!-- 买入表单信息 -->
-        <el-form
-          ref="form"
-          :rules="rules"
-          :inline="true"
-          :model="buyForm"
-          label-width="80px"
-        >
-          <el-form-item label="买入金额" prop="amount">
-            <el-input
-              placeholder="请输入买入金额"
-              v-model="buyForm.amount"
-            ></el-input>
-          </el-form-item>
-        </el-form>
-  
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="handleBuyClose">取 消</el-button>
-          <el-button type="primary" @click="buy">确 定</el-button>
-        </span>
-      </el-dialog>
   
       <template>
         <el-table :data="tableData" style="width: 100%">
@@ -88,19 +61,8 @@
             type: "买入",
           },
         ],
-        //buy
-        buyFormVisible: false,
-        buyForm: {
-          amount: 100,
-        },
         //row data
         fund: {},
-        // other
-        rules: {
-          amount: [
-            { required: true, message: "请输入买入金额", trigger: "blur" },
-          ],
-        },
       };
     },
     methods: {
@@ -109,26 +71,13 @@
         //条件查询基金
         console.log(this.insuranceSearchForm.name)
       },
-      getActiveInsurances() {
+      getInsuranceList() {
         //查询所有理财产品
       },
-      //buy
-      handleBuy(fund) {
-        this.buyFormVisible = true;
-        this.fund = fund;
-      },
-      handleBuyClose() {
-        this.$refs["form"].resetFields();
-        this.buyFormVisible = false;
-      },
-      buy() {
-        //向后端发送请求
-        console.log("buy " + this.buyForm.amount);
-        console.log(this.fund);
-      },
+      
     },
     mounted() {
-      this.getActiveInsurances();
+      this.getInsuranceList();
     },
   };
   </script>

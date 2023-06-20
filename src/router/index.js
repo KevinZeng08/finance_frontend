@@ -5,6 +5,7 @@ import AdminMain from "@/views/admin/Main.vue"
 import User from "@/views/admin/user.vue"
 import Fund from '@/views/admin/fund.vue'
 import FinanceProduct from '@/views/admin/financeProduct.vue'
+import Insurance from '@/views/admin/insurance.vue'
 
 import UserMain from "@/views/user/Main.vue"
 import UserFund from '@/views/user/fund.vue'
@@ -35,7 +36,12 @@ export default new VueRouter({
           name: 'financeproduct', meta: { flag: 1 },
           path: 'financeproduct',   //理财产品管理
           component: FinanceProduct
-        }
+        },
+        {
+          name: 'insurance', meta: { flag: 1 },
+          path: 'insurance',   //理财产品管理
+          component: Insurance
+        },
       ]
     },
     //用户--主页

@@ -4,7 +4,7 @@
       <!-- form搜索区域 -->
       <el-form :inline="true" :model="productSearchForm">
         <el-form-item>
-          <el-input placeholder="请输入基金名称" v-model="productSearchForm.name"></el-input>
+          <el-input placeholder="请输入理财产品名称" v-model="productSearchForm.name"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="searchProduct">查询</el-button>

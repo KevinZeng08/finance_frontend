@@ -42,6 +42,10 @@
       <i class="el-icon-setting"></i>
       <span slot="title">理财产品管理</span>
     </el-menu-item>
+    <el-menu-item index="4" @click="clickInsurance">
+      <i class="el-icon-setting"></i>
+      <span slot="title">保险管理</span>
+    </el-menu-item>
   </el-menu>
 </template>
 
@@ -97,7 +101,14 @@ export default {
         () => { }
       )
     },
-
+    clickInsurance () {
+      this.$router.push({
+        name: 'insurance'
+      },
+        () => { },
+        () => { }
+      )
+    }
 
   },
 
