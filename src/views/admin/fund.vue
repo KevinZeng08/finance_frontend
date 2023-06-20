@@ -82,29 +82,30 @@
         :model="form"
         label-width="80px"
       >
-        <el-form-item label="姓名" prop="name">
-          <el-input placeholder="请输入姓名" v-model="form.name"></el-input>
+        <el-form-item label="名称" prop="f_name">
+          <el-input placeholder="请输入..." v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="年龄" prop="age">
-          <el-input placeholder="请输入年龄" v-model="form.age"></el-input>
+        <el-form-item label="编号" prop="f_id">
+          <el-input placeholder="请输入..." v-model="form.age"></el-input>
         </el-form-item>
-        <el-form-item label="性别" prop="sex">
+        <el-form-item label="类型" prop="f_type">
+          <el-input placeholder="请输入..." v-model="form.age"></el-input>
+        </el-form-item>
+        <el-form-item label="金额" prop="f_amount">
+          <el-input placeholder="请输入..." v-model="form.age"></el-input>
+        </el-form-item>
+        <el-form-item label="风险等级" prop="risk_level">
           <el-select v-model="form.sex" placeholder="请选择">
-            <el-option label="男" :value="1"></el-option>
-            <el-option label="女" :value="0"></el-option>
+            <el-option label="低" :value="0"></el-option>
+            <el-option label="中" :value="1"></el-option>
+            <el-option label="高" :value="2"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="出生日期" prop="birth">
-          <el-date-picker
-            v-model="form.birth"
-            type="date"
-            placeholder="选择日期"
-            value-format="yyyy-MM-DD"
-          >
-          </el-date-picker>
+        <el-form-item label="管理者" prop="f_manager">
+          <el-input placeholder="请输入..." v-model="form.age"></el-input>
         </el-form-item>
         <el-form-item label="地址" prop="addr">
-          <el-input placeholder="请输入地址" v-model="form.addr"></el-input>
+          <el-input placeholder="请输入..." v-model="form.addr"></el-input>
         </el-form-item>
       </el-form>
 
@@ -124,13 +125,14 @@
     </el-row>
     <template>
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="idCard" label="身份证号" width="180">
-        </el-table-column>
-        <el-table-column prop="name" label="姓名" width="180">
-        </el-table-column>
-        <el-table-column prop="phone" label="手机号"> </el-table-column>
-        <el-table-column prop="type" label="类型"> </el-table-column>
-        <el-table-column prop="type" label="操作">
+        <el-table-column prop="f_name" label="名称"> </el-table-column>
+        <el-table-column prop="f_id" label="编号"> </el-table-column>
+        <el-table-column prop="f_type" label="类型"> </el-table-column>
+        <el-table-column prop="f_amount" label="金额"> </el-table-column>
+        <el-table-column prop="risk_level" label="风险等级"> </el-table-column>
+        <el-table-column prop="f_manager" label="管理者"> </el-table-column>
+
+        <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="mini" @click="handleDetail(scope.row)"
               >详情</el-button
@@ -163,7 +165,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       addVisible: false,
       detailVisible: false,
@@ -176,55 +178,55 @@ export default {
       },
       tableData: [
         {
-          id: 1,
-          idCard: "2016-05-02",
-          name: "王小虎",
-          phone: "上海市普陀区金沙江路 1518 弄",
-          type: "高端用户",
-          state: 0,
+          f_name: '1',
+          f_id: '1',
+          f_type: '1',
+          f_amount: '1',
+          risk_level: '1',
+          f_manager: '1'
         },
       ],
-    };
+    }
   },
   methods: {
-    submit() {},
+    submit () { },
     // 弹窗关闭的时候
-    handleClose() {
-      this.$refs.form.resetFields();
-      this.addVisible = false;
+    handleClose () {
+      this.$refs.form.resetFields()
+      this.addVisible = false
     },
-    cancel() {
-      this.handleClose();
+    cancel () {
+      this.handleClose()
     },
 
     // 获取列表的数据
-    getList() {},
+    getList () { },
     // 选择页码的回调函数
-    handlePage(val) {
+    handlePage (val) {
       // console.log(val, 'val')
-      this.pageData.page = val;
-      this.getList();
+      this.pageData.page = val
+      this.getList()
     },
     // 列表的查询
-    onSubmit() {
-      this.getList();
+    onSubmit () {
+      this.getList()
     },
-    
+
 
     // 详情弹窗
-    handleDetail(row){
+    handleDetail (row) {
       console.log(row)
       this.detailVisible = true
     },
 
     //获取基金详情
-    getFund(){
+    getFund () {
 
     }
   },
 
-  mounted() {
-    this.getList();
+  mounted () {
+    this.getList()
   },
 };
 </script>

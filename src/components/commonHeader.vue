@@ -1,6 +1,8 @@
 <template>
   <div class="header-cintainer">
-    <div class="left">XX版本</div>
+    <div class="left">
+      <h2>{{ version }}版</h2>
+    </div>
     <div class="right">
       <el-dropdown>
         <span class="el-dropdown-link">
@@ -16,8 +18,20 @@
 </template>
 
 <script>
-export default {
 
+export default {
+  data () {
+    return {
+      version: ''
+    }
+  },
+  mounted () {
+    if (this.$route.meta.flag === 0) {
+      this.version = '用户'
+    } else {
+      this.version = '管理'
+    }
+  }
 }
 </script>
 

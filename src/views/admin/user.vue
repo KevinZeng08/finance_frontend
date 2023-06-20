@@ -2,7 +2,6 @@
 <template>
   <div>
     <div class="manage-header">
-      
       <!-- form搜索区域 -->
       <el-form :inline="true" :model="userForm">
         <el-form-item>
@@ -23,9 +22,6 @@
         <el-table-column prop="type" label="类型"> </el-table-column>
         <el-table-column prop="type" label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" @click="handleDetail(scope.row)"
-              >详情</el-button
-            >
             <el-button
               size="mini"
               type="danger"
@@ -40,13 +36,12 @@
       <el-pagination small layout="prev, pager, next" :total="50">
       </el-pagination>
     </div>
-    <div><router-view></router-view></div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       tableData: [
         {
@@ -60,24 +55,24 @@ export default {
       userForm: {
         name: "",
       },
-    };
+    }
   },
   methods: {
-    handleDetail(row) {
-      console.log(row);
+    handleDetail (row) {
+      console.log(row)
     },
-    clickDetail() {
+    clickDetail () {
       this.$router.push(
         {
           name: "userDetail",
         },
-        () => {},
-        () => {}
-      );
+        () => { },
+        () => { }
+      )
     },
 
-    handleDelete(index, row) {
-      console.log(index, row);
+    handleDelete (index, row) {
+      console.log(index, row)
     },
   },
 };
@@ -85,8 +80,8 @@ export default {
 
 <style>
 .manage-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 </style>
