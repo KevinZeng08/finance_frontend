@@ -5,6 +5,7 @@ import AdminMain from "@/views/admin/Main.vue"
 import User from "@/views/admin/user.vue"
 import Fund from '@/views/admin/fund.vue'
 import FinanceProduct from '@/views/admin/financeProduct.vue'
+import AdminUserDetail from '@/views/admin/detail/user.vue'
 
 import UserMain from "@/views/user/Main.vue"
 import UserFund from '@/views/user/fund.vue'
@@ -21,6 +22,13 @@ export default new VueRouter({
           name: 'user',
           path: 'user',  //用户管理
           component: User,
+          children: [
+            {
+              name: 'userDetail',
+              path: 'detail',  //用户详情
+              component: AdminUserDetail
+            }
+          ]
         },
         {
           name: 'fund',
