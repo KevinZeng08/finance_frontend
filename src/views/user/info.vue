@@ -16,7 +16,10 @@
         label-width="80px"
       >
         <el-form-item label="新密码" prop="password">
-          <el-input placeholder="请输入新密码" v-model="form.password"></el-input>
+          <el-input
+            placeholder="请输入新密码"
+            v-model="form.password"
+          ></el-input>
         </el-form-item>
       </el-form>
 
@@ -53,6 +56,7 @@
 </template>
 
 <script>
+import { reqQueryUserInfo } from "@/api/index.js";
 export default {
   data() {
     return {
@@ -95,19 +99,26 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           // 执行登录逻辑
-          console.log('修改密码成功');
+          console.log("修改密码成功");
         }
       });
       this.person.password = "123456";
       //根据person的id发送请求更新密码的请求
     },
-    queryUserInfo(){
-      //根据用户id查询用户信息
-    }
+
+    // queryUserInfo() {},
   },
 
   mounted() {
-    this.queryUserInfo()
+    //根据用户id查询用户信息
+    const userid = sessionStorage.getItem("id");
+    console.log(userid);
+    reqQueryUserInfo({
+        id: userid,
+    }).then((res) => {
+      console.log(res.data);
+      // this.person = res.data;
+    });
   },
 };
 </script>

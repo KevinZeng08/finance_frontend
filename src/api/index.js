@@ -11,3 +11,11 @@ export const reqHelloworld = () => {
         method: 'GET'
     })
 }
+
+//用户个人信息查询
+export const reqQueryUserInfo = () => {
+    return requests({
+        url: '/info',
+        method: 'GET',
+    })
+}
