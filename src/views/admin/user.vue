@@ -1,6 +1,18 @@
 <!-- 用户管理组件 -->
 <template>
   <div>
+    <div class="manage-header">
+      
+      <!-- form搜索区域 -->
+      <el-form :inline="true" :model="userForm">
+        <el-form-item>
+          <el-input placeholder="请输入名称" v-model="userForm.name"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">查询</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
     <template>
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="idCard" label="身份证号" width="180">
@@ -45,6 +57,9 @@ export default {
           type: "高端用户",
         },
       ],
+      userForm: {
+        name: "",
+      },
     };
   },
   methods: {
@@ -69,4 +84,9 @@ export default {
 </script>
 
 <style>
+.manage-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 </style>
