@@ -11,7 +11,7 @@
       <el-descriptions
         class="margin-top"
         title="xx基金详情"
-        :column="3"
+        :column="2"
         :size="size"
         border
       >
@@ -74,7 +74,7 @@
       width="50%"
       :before-close="handleClose"
     >
-      <!-- 用户的表单信息 -->
+      <!-- 基金的表单信息 -->
       <el-form
         ref="form"
         :rules="rules"
@@ -174,6 +174,14 @@ export default {
         birth: "",
         addr: "",
       },
+      size: '',
+      rules: {
+        name: [{ required: true, message: "请输入姓名" }],
+        age: [{ required: true, message: "请输入年龄" }],
+        sex: [{ required: true, message: "请选择性别" }],
+        birth: [{ required: true, message: "请选择出生日期" }],
+        addr: [{ required: true, message: "请输入地址" }],
+      },
       tableData: [
         {
           id: 1,
@@ -209,18 +217,18 @@ export default {
     onSubmit() {
       this.getList();
     },
-    
 
     // 详情弹窗
-    handleDetail(row){
-      console.log(row)
-      this.detailVisible = true
+    handleDetail(row) {
+      console.log(row);
+      this.detailVisible = true;
+    },
+    handleDetailClose() {
+      this.detailVisible = false;
     },
 
     //获取基金详情
-    getFund(){
-
-    }
+    getFund() {},
   },
 
   mounted() {

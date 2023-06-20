@@ -8,10 +8,12 @@
 export default {
   name: 'App',
   components: {
+  },
+  mounted(){
+    console.log('App mounted!')
   }
 }
 </script>
-
 
 <style >
 </style>

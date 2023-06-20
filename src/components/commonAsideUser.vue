@@ -32,15 +32,23 @@
     </el-submenu> -->
     <el-menu-item index="1" @click="clickCard">
       <i class="el-icon-menu"></i>
-      <span slot="title">银行卡管理</span>
+      <span slot="title">个人信息</span>
     </el-menu-item>
-    <el-menu-item index="2" @click="clickFund">
+    <el-menu-item index="2" @click="clickProperty">
+      <i class="el-icon-menu"></i>
+      <span slot="title">资产管理</span>
+    </el-menu-item>
+    <el-menu-item index="3" @click="clickFund">
       <i class="el-icon-document"></i>
-      <span slot="title">基金查询</span>
+      <span slot="title">基金购买</span>
     </el-menu-item>
-    <el-menu-item index="3" @click="clickFinance">
+    <el-menu-item index="4" @click="clickFinance">
       <i class="el-icon-setting"></i>
-      <span slot="title">理财产品查询</span>
+      <span slot="title">理财产品购买</span>
+    </el-menu-item>
+    <el-menu-item index="5" @click="clickInsurance">
+      <i class="el-icon-setting"></i>
+      <span slot="title">保险购买</span>
     </el-menu-item>
   </el-menu>
 </template>
@@ -75,7 +83,15 @@ export default {
     },
     clickCard () {
       this.$router.push({
-        name: 'userCard'
+        name: 'userInfo'
+      },
+        () => { },
+        () => { }
+      )
+    },
+    clickProperty() {
+      this.$router.push({
+          name: 'userProperty'
       },
         () => { },
         () => { }
@@ -97,7 +113,14 @@ export default {
         () => { }
       )
     },
-
+    clickInsurance () {
+      this.$router.push({
+        name: 'userInsurance'
+      },
+        () => { },
+        () => { }
+      )
+    }
   },
 
 }

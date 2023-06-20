@@ -10,7 +10,9 @@ import AdminUserDetail from '@/views/admin/detail/user.vue'
 import UserMain from "@/views/user/Main.vue"
 import UserFund from '@/views/user/fund.vue'
 import UserFinanceProduct from '@/views/user/financeProduct.vue'
-import UserCard from "@/views/user/card.vue"
+import UserInfo from "@/views/user/info.vue"
+import UserProperty from "@/views/user/property.vue"
+import UserInsurance from "@/views/user/insurance.vue"
 
 export default new VueRouter({
   routes: [
@@ -48,9 +50,9 @@ export default new VueRouter({
       component: UserMain,
       children: [   //子路由 先匹配主路由，再匹配子路由
         {
-          name: 'userCard',
-          path: 'card', //银行卡管理
-          component: UserCard
+          name: 'userInfo',
+          path: 'info', //银行卡管理
+          component: UserInfo
         },
         {
           name: 'userFund',
@@ -61,6 +63,16 @@ export default new VueRouter({
           name: 'userFinanceproduct',
           path: 'financeproduct',   //理财产品管理
           component: UserFinanceProduct
+        },
+        {
+          name: 'userProperty',
+          path: 'property',   //我的资产
+          component: UserProperty
+        },
+        {
+          name: 'userInsurance',
+          path: 'insurance',   //我的保险
+          component: UserInsurance
         }
       ]
     }
