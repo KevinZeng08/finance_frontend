@@ -1,5 +1,5 @@
 // 对axios进行二次封装
-import axios from 'axios';
+import axios from 'axios'
 // import nprogress from 'nprogress';//进度条开始和结束start和done
 //引入进度条样式:进度条才会出bi并且可以修改颜色等等
 // import 'nprogress/nprogress.css'
@@ -27,4 +27,4 @@ const requests = axios.create({
 //         return Promise.reject(error)  //终结promise链
 //     }
 // )
-export default requests;
+export default requests

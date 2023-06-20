@@ -4,12 +4,11 @@
       <h2>{{ version }}版</h2>
     </div>
     <div class="right">
-      <el-dropdown>
+      <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           <img class="userPicture" src="../assets//images/user.png" alt="" />
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人中心</el-dropdown-item>
           <el-dropdown-item>退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -25,13 +24,20 @@ export default {
       version: ''
     }
   },
+  methods: {
+    handleCommand () {
+      console.log('123')
+      this.$router.push({ name: 'login' })
+    }
+  },
   mounted () {
     if (this.$route.meta.flag === 0) {
       this.version = '用户'
     } else {
       this.version = '管理'
     }
-  }
+  },
+
 }
 </script>
 

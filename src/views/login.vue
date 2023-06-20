@@ -19,7 +19,7 @@
     </el-form-item>
     <el-form-item>
       <el-radio v-model="type" label="1">用户</el-radio>
-      <el-radio v-model="type" label="0">管理员</el-radio>
+      <el-radio v-model="type" label="2">管理员</el-radio>
     </el-form-item>
     <el-form-item>
       <el-button @click="sumbit" type="primary">登录</el-button>
@@ -35,7 +35,7 @@ export default {
       if (this.type === "1") {
         this.$router.push({ name: 'userHome' })
       }
-      if (this.type === "0") {
+      if (this.type === "2") {
         this.$router.push({ name: 'admin' })
       }
       sessionStorage.setItem('id', 10)
@@ -43,7 +43,7 @@ export default {
   },
   data () {
     return {
-      type: 1,
+      type: '',
       form: {
       },
       rules: {

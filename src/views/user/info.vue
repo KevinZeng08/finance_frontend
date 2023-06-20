@@ -56,9 +56,9 @@
 </template>
 
 <script>
-import { reqQueryUserInfo } from "@/api/index.js";
+import { reqQueryUserInfo } from "@/api/index.js"
 export default {
-  data() {
+  data () {
     return {
       //password
       //password
@@ -88,37 +88,39 @@ export default {
         age: "22",
         email: "kevin08@qq.com",
       },
-    };
+    }
   },
 
   methods: {
-    handleClose() {
-      this.dialogVisible = false;
+    handleClose () {
+      this.dialogVisible = false
     },
-    updatePassword() {
+    updatePassword () {
       this.$refs.form.validate((valid) => {
         if (valid) {
           // 执行登录逻辑
-          console.log("修改密码成功");
+          console.log("修改密码成功")
         }
-      });
-      this.person.password = "123456";
+      })
+      this.person.password = "123456"
       //根据person的id发送请求更新密码的请求
     },
 
     // queryUserInfo() {},
   },
 
-  mounted() {
+  mounted () {
     //根据用户id查询用户信息
-    const userid = sessionStorage.getItem("id");
-    console.log(userid);
+    const userid = sessionStorage.getItem("id")
+    console.log(userid + '---')
     reqQueryUserInfo({
-        id: userid,
+      id: userid,
     }).then((res) => {
-      console.log(res.data);
+      console.log(res.data)
       // this.person = res.data;
-    });
+    }).catch((err) => {
+      console.log(err)
+    })
   },
 };
 </script>

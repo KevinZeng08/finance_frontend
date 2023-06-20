@@ -75,6 +75,7 @@ export default new VueRouter({
     //登录
     {
       path: '/login',
+      name: 'login',
       component: Login,
     },
     { //重定向，在项目跑起来的时候，访问'/',立马让它定向到首页
