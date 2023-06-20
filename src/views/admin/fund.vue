@@ -219,7 +219,6 @@ export default {
     onSubmit () {
       this.getList()
     },
-<<<<<<< HEAD
 
     // 详情弹窗
     handleDetail(row) {
@@ -232,20 +231,6 @@ export default {
 
     //获取基金详情
     getFund() {},
-=======
-
-
-    // 详情弹窗
-    handleDetail (row) {
-      console.log(row)
-      this.detailVisible = true
-    },
-
-    //获取基金详情
-    getFund () {
-
-    }
->>>>>>> c7e14383a60ab4fd62551bade1039d77d0535138
   },
 
   mounted () {
