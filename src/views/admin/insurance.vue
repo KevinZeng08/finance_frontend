@@ -22,13 +22,16 @@
           </el-table-column>
           <el-table-column prop="person" label="适用人群"> </el-table-column>
           <el-table-column prop="project" label="保险项目"> </el-table-column>
-          <el-table-column prop="type" label="操作">
-            <template slot-scope="scope">
-              <el-button size="mini" type="success" @click="handleBuy(scope.row)"
-                >买入</el-button
-              >
-            </template>
-          </el-table-column>
+          <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.row)"
+              >删除</el-button
+            >
+          </template>
+        </el-table-column>
         </el-table>
       </template>
     </div>
