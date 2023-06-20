@@ -3,14 +3,13 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import AdminMain from "@/views/admin/Main.vue"
 import User from "@/views/admin/user.vue"
-import Insurance from '@/views/admin/insurance.vue'
 import Fund from '@/views/admin/fund.vue'
 import FinanceProduct from '@/views/admin/financeProduct.vue'
 
 import UserMain from "@/views/user/Main.vue"
-import UserInsurance from '@/views/user/insurance.vue'
-import UserFund from '@/views/admin/user.vue'
+import UserFund from '@/views/user/fund.vue'
 import UserFinanceProduct from '@/views/user/financeProduct.vue'
+import UserCard from "@/views/user/card.vue"
 
 export default new VueRouter({
   routes: [
@@ -24,11 +23,6 @@ export default new VueRouter({
           component: User,
         },
         {
-          name: 'insurance',
-          path: 'insurance', //保险管理
-          component: Insurance
-        },
-        {
           name: 'fund',
           path: 'fund',  //基金管理
           component: Fund
@@ -40,14 +34,15 @@ export default new VueRouter({
         }
       ]
     },
+    //用户--主页
     {
       path: '/',
       component: UserMain,
       children: [   //子路由 先匹配主路由，再匹配子路由
         {
-          name: 'userInsurance',
-          path: 'insurance', //保险管理
-          component: UserInsurance
+          name: 'userCard',
+          path: 'card', //银行卡管理
+          component: UserCard
         },
         {
           name: 'userFund',

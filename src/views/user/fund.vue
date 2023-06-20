@@ -1,5 +1,5 @@
 <template>
-  <h1>我是基金信息</h1>
+  <h1>用户基金信息</h1>
 </template>
 
 <script>
