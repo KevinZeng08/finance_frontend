@@ -22,4 +22,7 @@ export default {
 .el-header {
   padding: 0;
 }
+.el-main {
+  background-color: rgb(232, 232, 232);
+}
 </style>

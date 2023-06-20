@@ -120,7 +120,7 @@
         type="primary"
         style="margin-bottom: 20px"
         @click="addVisible = true"
-        >+新增</el-button
+        >+ 新增</el-button
       >
     </el-row>
     <template>
@@ -221,16 +221,16 @@ export default {
     },
 
     // 详情弹窗
-    handleDetail(row) {
-      console.log(row);
-      this.detailVisible = true;
+    handleDetail (row) {
+      console.log(row)
+      this.detailVisible = true
     },
-    handleDetailClose() {
-      this.detailVisible = false;
+    handleDetailClose () {
+      this.detailVisible = false
     },
 
     //获取基金详情
-    getFund() {},
+    getFund () { },
   },
 
   mounted () {

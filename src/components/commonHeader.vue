@@ -48,7 +48,7 @@ export default {
   justify-content: space-between;
   display: flex;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 20px;
   color: #fff;
 }
 .userPicture {
