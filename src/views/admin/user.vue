@@ -13,16 +13,16 @@
       </el-form>
     </div>
     <template>
-      <el-table :data="tableData" style="width: 100%" v-for="item in tableData" :key="item.c_id">
+      <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="c_id_card" label="身份证号" width="180">
         </el-table-column>
-        <el-table-column prop="name" label="姓名" width="180">
+        <el-table-column prop="c_name" label="姓名" width="180">
         </el-table-column>
-        <el-table-column prop="bank_card" label="银行卡号" width="180">
+        <el-table-column prop="c_id_card" label="银行卡号" width="180">
         </el-table-column>
-        <el-table-column prop="phone" label="手机号"> </el-table-column>
-        <el-table-column prop="type" label="类型"> </el-table-column>
-        <el-table-column prop="type" label="操作">
+        <el-table-column prop="c_phone" label="手机号"> </el-table-column>
+        <el-table-column prop="c_type" label="类型"> </el-table-column>
+        <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -42,20 +42,11 @@
 </template>
 
 <script>
-import {reqQueryAllCustomer} from '@/api/index'
+import { reqQueryAllCustomer } from '@/api/index'
 export default {
   data () {
     return {
-      tableData: [
-        {
-          c_id: 1,
-          c_id_card: "9841998189",
-          bank_card: "1969198189",
-          name: "王小虎",
-          phone: "1915195230",
-          type: "高端用户",
-        },
-      ],
+      tableData: [],
       userForm: {
         name: "",
       },
@@ -75,7 +66,7 @@ export default {
       )
     },
 
-    search(){
+    search () {
       console.log(this.userForm)
     },
 
@@ -83,14 +74,15 @@ export default {
       console.log(index, row)
     },
 
-    getUserList() {
+    getUserList () {
       reqQueryAllCustomer().then(res => {
-        this.tableData = res.data
-      }) 
+        this.tableData = res.data.data
+        // console.log(res.data.data)
+      })
     }
   },
 
-  mounted(){
+  mounted () {
     this.getUserList()
   }
 };

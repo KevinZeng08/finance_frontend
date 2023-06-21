@@ -10,7 +10,7 @@
     text-color="#fff"
     active-text-color="#ffd04b"
   >
-    <h3>金融管理系统</h3>
+    <h2>金融管理系统</h2>
     <!-- 多级菜单 -->
     <!-- <el-submenu index="1">
       <template slot="title">
@@ -50,7 +50,7 @@
 </template>
 
 <style scoped>
-h3 {
+h2 {
   text-align: center;
   color: #fff;
 }

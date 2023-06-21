@@ -1,7 +1,7 @@
 <template>
   <div class="header-cintainer">
     <div class="left">
-      <h2>{{ version }}版</h2>
+      <h4>{{ version }}版</h4>
     </div>
     <div class="right">
       <el-dropdown @command="handleCommand">
