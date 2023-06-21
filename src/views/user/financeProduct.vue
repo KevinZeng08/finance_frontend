@@ -41,14 +41,14 @@
 
     <template>
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="name" label="理财产品名称" width="180">
+        <el-table-column prop="p_name" label="理财产品名称" width="180">
         </el-table-column>
-        <el-table-column prop="year" label="理财年限">
+        <el-table-column prop="p_year" label="理财年限">
         </el-table-column>
-        <el-table-column prop="rate" label="年利率">
+        <el-table-column prop="p_rate" label="年利率">
         </el-table-column>
-        <el-table-column prop="amount" label="购买金额"> </el-table-column>
-        <el-table-column prop="description" label="产品描述"> </el-table-column>
+        <el-table-column prop="p_amount" label="购买金额"> </el-table-column>
+        <el-table-column prop="p_description" label="产品描述"> </el-table-column>
         <el-table-column prop="type" label="操作">
           <template slot-scope="scope">
             <el-button size="mini" type="success" @click="handleBuy(scope.row)"
@@ -72,12 +72,12 @@ export default {
       //table
       tableData: [
         {
-          id: 12,
-          name: "3年期存款产品",
-          year: 3,
-          amount: 1520,
-          rate: 2.5,
-          description: "这是一款3年期的存款理财产品",
+          p_id: 12,
+          p_name: "3年期存款产品",
+          p_year: 3,
+          p_amount: 1520,
+          p_rate: 2.5,
+          p_description: "这是一款3年期的存款理财产品",
         },
       ],
       //buy

@@ -41,12 +41,12 @@
 
     <template>
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="name" label="基金名称" width="180">
+        <el-table-column prop="f_name" label="基金名称" width="180">
         </el-table-column>
-        <el-table-column prop="type" label="基金类型" width="180">
+        <el-table-column prop="f_type" label="基金类型" width="180">
         </el-table-column>
-        <el-table-column prop="amount" label="基金金额"> </el-table-column>
-        <el-table-column prop="risk_level" label="风险等级"> </el-table-column>
+        <el-table-column prop="f_amount" label="基金金额"> </el-table-column>
+        <el-table-column prop="f_risk_level" label="风险等级"> </el-table-column>
         <el-table-column prop="type" label="操作">
           <template slot-scope="scope">
             <el-button size="mini" type="success" @click="handleBuy(scope.row)"
@@ -70,11 +70,11 @@ export default {
       //table
       tableData: [
         {
-          id: 12,
-          name: "基金1",
-          type: "股票型",
-          amount: "1000",
-          risk_level: "高风险",
+          f_id: 12,
+          f_name: "基金1",
+          f_type: "股票型",
+          f_amount: "1000",
+          f_risk_level: "高风险",
         },
       ],
       //buy
