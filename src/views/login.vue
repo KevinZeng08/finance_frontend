@@ -38,7 +38,7 @@ export default {
       if (this.type === "2") {
         this.$router.push({ name: 'admin' })
       }
-      sessionStorage.setItem('id', 10)
+      sessionStorage.setItem('id', 1)
     }
   },
   data () {

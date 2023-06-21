@@ -70,10 +70,10 @@
         person.c_phone
       }}</el-descriptions-item>
       <el-descriptions-item label="银行卡号" :span="2">{{
-        person.bank_card
+        person.b_id
       }}</el-descriptions-item>
       <el-descriptions-item label="银行卡余额" :span="2"
-        >{{ person.c_amount }}
+        >{{ person.b_amount }}
         <el-button size="mini" type="primary" @click="rechargeVisible = true"
           >充值</el-button
         >
@@ -131,8 +131,8 @@ export default {
         c_id: 12,
         c_name: "kooriookami",
         c_phone: "18100000000",
-        bank_card: "3269519184915",
-        c_amount: 10000,
+        b_id: "3269519184915",
+        b_amount: 10000,
         c_password: "11111",
         c_id_card: "26519951159",
         c_age: "22",
@@ -179,10 +179,10 @@ export default {
         id: userid,
       })
         .then((res) => {
-          if(res.data.code === 200) {
+          if(res.data.code === "200") {
             console.log(res.data);
             this.person = res.data.data;
-          } else if(res.data.code === 404) {
+          } else if(res.data.code === "404") {
             console.log(res.data.msg);
           }
         })
