@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { reqQueryUserInfo } from "@/api/index.js";
+import { reqQueryUserInfo, reqChangePassword } from "@/api/index.js";
 export default {
   data() {
     return {
@@ -149,7 +149,18 @@ export default {
     updatePassword() {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          // 执行登录逻辑
+          // 更改密码
+          reqChangePassword({
+            id: this.person.c_id,
+            password: this.person.c_password,
+          }).then((res) => {
+            if (res.data.code === "200") {
+              console.log("修改密码成功");
+            } else if (res.data.code === "404") {
+              console.log("修改密码失败");
+            }
+          }
+          );
           console.log("修改密码成功");
         }
       });

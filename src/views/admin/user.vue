@@ -13,8 +13,8 @@
       </el-form>
     </div>
     <template>
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="id_card" label="身份证号" width="180">
+      <el-table :data="tableData" style="width: 100%" v-for="item in tableData" :key="item.c_id">
+        <el-table-column prop="c_id_card" label="身份证号" width="180">
         </el-table-column>
         <el-table-column prop="name" label="姓名" width="180">
         </el-table-column>
@@ -48,8 +48,8 @@ export default {
     return {
       tableData: [
         {
-          id: 1,
-          id_card: "9841998189",
+          c_id: 1,
+          c_id_card: "9841998189",
           bank_card: "1969198189",
           name: "王小虎",
           phone: "1915195230",
@@ -84,9 +84,9 @@ export default {
     },
 
     getUserList() {
-      // reqQueryAllCustomer().then(res => {
-      //   console.log(res)
-      // }) 
+      reqQueryAllCustomer().then(res => {
+        this.tableData = res.data
+      }) 
     }
   },
 

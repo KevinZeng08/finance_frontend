@@ -93,6 +93,15 @@ export const reqQueryUserInfo = (params) => {
   });
 };
 
+//用户修改密码
+export const reqChangePassword = (params) => {
+  return requests({
+    url: `/password/`,
+    method: "POST",
+    data: params,
+  });
+};
+
 //用户银行卡充值
 export const reqRecharge = (params) => {
   return requests({
