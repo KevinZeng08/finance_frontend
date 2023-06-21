@@ -7,7 +7,7 @@
           <el-input placeholder="请输入名称" v-model="userForm.name"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
+          <el-button type="primary">查询</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -39,18 +39,11 @@
 </template>
 
 <script>
+import { reqQueryProductInfo } from '@/api'
 export default {
   data () {
     return {
-      tableData: [
-        {
-          p_name: '债券',
-          p_id: 'p1344',
-          p_description: '以国债、金融债。。。。',
-          p_amount: '50000',
-          p_year: '6'
-        },
-      ],
+      tableData: [],
       userForm: {
         name: "",
       },
@@ -73,8 +66,25 @@ export default {
     handleDelete (index, row) {
       console.log(index, row)
     },
+    queryProductInfo () {
+      reqQueryProductInfo()
+        .then((res) => {
+          if (res.data.code === "200") {
+            this.tableData = res.data.data
+          } else if (res.data.code === "404") {
+            console.log(res.data.msg)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+
   },
-};
+  mounted () {
+    this.queryProductInfo()
+  },
+}
 </script>
 
 <style>

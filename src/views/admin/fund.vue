@@ -164,6 +164,7 @@
 </template>
 
 <script>
+import { reqQueryAllFund } from '@/api'
 export default {
   data () {
     return {
@@ -184,16 +185,7 @@ export default {
         birth: [{ required: true, message: "请选择出生日期" }],
         addr: [{ required: true, message: "请输入地址" }],
       },
-      tableData: [
-        {
-          f_name: '1',
-          f_id: '1',
-          f_type: '1',
-          f_amount: '1',
-          risk_level: '1',
-          f_manager: '1'
-        },
-      ],
+      tableData: []
     }
   },
   methods: {
@@ -209,8 +201,8 @@ export default {
 
     // 获取列表的数据
     getList () {
-      
-     },
+
+    },
     // 选择页码的回调函数
     handlePage (val) {
       // console.log(val, 'val')
@@ -232,7 +224,18 @@ export default {
     },
 
     //获取基金详情
-    getFund () { },
+    getFund () {
+      reqQueryAllFund().then((res) => {
+        if (res.data.code === "200") {
+          this.tableData = res.data.data
+        } else if (res.data.code === "404") {
+          console.log(res.data.msg)
+        }
+      })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
   },
 
   mounted () {
