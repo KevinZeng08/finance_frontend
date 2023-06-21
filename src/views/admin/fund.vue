@@ -208,7 +208,9 @@ export default {
     },
 
     // 获取列表的数据
-    getList () { },
+    getList () {
+      
+     },
     // 选择页码的回调函数
     handlePage (val) {
       // console.log(val, 'val')

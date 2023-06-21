@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import {reqQueryAllCustomer} from '@/api/index'
 export default {
   data () {
     return {
@@ -75,7 +76,7 @@ export default {
     },
 
     search(){
-
+      console.log(this.userForm)
     },
 
     handleDelete (index, row) {
@@ -83,7 +84,9 @@ export default {
     },
 
     getUserList() {
-
+      // reqQueryAllCustomer().then(res => {
+      //   console.log(res)
+      // }) 
     }
   },
 
