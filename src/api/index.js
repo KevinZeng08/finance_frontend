@@ -116,6 +116,48 @@ export const reqQueryUserAsset = (params) => {
   return requests({
     url: `/property/query/`,
     method: "GET",
-    data: params
+    params: params
+  })
+}
+
+//已上线基金列表查询
+export const reqQueryActiveFund = () => {
+  return requests({
+    url: `/fund/query/`,
+    method: "GET",
+  })
+}
+
+//已上线理财产品查询
+export const reqQueryActiveProduct = () => {
+  return requests({
+    url: `/product/query/`,
+    method: "GET",
+  })
+}
+
+//已上线保险查询
+export const reqQueryActiveInsurance = () => {
+  return requests({
+    url: `/insurance/query/`,
+    method: "GET",
+  })
+}
+
+//用户购买基金
+export const reqBuyFund = (params) => {
+  return requests({
+    url: `/fund/buy/`,
+    method: "POST",
+    query: params,
+  })
+}
+
+//用户登录
+export const reqUserLogin = (params) => {
+  return requests({
+    url: `/login/`,
+    method: "POST",
+    data: params,
   })
 }

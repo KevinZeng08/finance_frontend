@@ -62,6 +62,7 @@
   </template>
   
   <script>
+  import {reqQueryActiveInsurance} from '@/api/index'
   export default {
     data() {
       return {
@@ -109,6 +110,9 @@
       },
       getActiveInsurances() {
         //查询所有理财产品
+        reqQueryActiveInsurance().then((res) => {
+          this.tableData = res.data.data;
+        });
       },
       //buy
       handleBuy(fund) {

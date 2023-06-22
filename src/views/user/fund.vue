@@ -4,7 +4,10 @@
       <!-- form搜索区域 -->
       <el-form :inline="true" :model="fundSearchForm">
         <el-form-item>
-          <el-input placeholder="请输入基金名称" v-model="fundSearchForm.name"></el-input>
+          <el-input
+            placeholder="请输入基金名称"
+            v-model="fundSearchForm.name"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="searchFund">查询</el-button>
@@ -46,7 +49,8 @@
         <el-table-column prop="f_type" label="基金类型" width="180">
         </el-table-column>
         <el-table-column prop="f_amount" label="基金金额"> </el-table-column>
-        <el-table-column prop="f_risk_level" label="风险等级"> </el-table-column>
+        <el-table-column prop="risk_level" label="风险等级">
+        </el-table-column>
         <el-table-column prop="type" label="操作">
           <template slot-scope="scope">
             <el-button size="mini" type="success" @click="handleBuy(scope.row)"
@@ -60,6 +64,7 @@
 </template>
 
 <script>
+import { reqBuyFund, reqQueryActiveFund } from "@/api/index";
 export default {
   data() {
     return {
@@ -74,7 +79,7 @@ export default {
           f_name: "基金1",
           f_type: "股票型",
           f_amount: "1000",
-          f_risk_level: "高风险",
+          risk_level: "高风险",
         },
       ],
       //buy
@@ -88,19 +93,25 @@ export default {
       rules: {
         amount: [
           { required: true, message: "请输入买入金额", trigger: "blur" },
-          
         ],
       },
     };
   },
   methods: {
     //search
-    searchFund(){
+    searchFund() {
       //条件查询基金
-      console.log(this.fundSearchForm.name)
+      console.log(this.fundSearchForm.name);
     },
     getActiveFunds() {
       //查询所有已上线的基金
+      reqQueryActiveFund()
+        .then((res) => {
+          this.tableData = res.data.data
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     //buy
     handleBuy(fund) {
@@ -115,6 +126,23 @@ export default {
       //向后端发送请求
       console.log("buy " + this.buyForm.amount);
       console.log(this.fund);
+      const params = {
+        u_id : sessionStorage.getItem("id"),
+        f_id : this.fund.f_id,
+        amount: this.buyForm.amount
+      } 
+      reqBuyFund(params)
+        .then((res) => {
+          console.log(res);
+          this.$message({
+            message: "买入成功",
+            type: "success",
+          });
+          this.handleBuyClose();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   mounted() {

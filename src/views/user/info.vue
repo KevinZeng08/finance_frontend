@@ -70,7 +70,7 @@
         person.c_phone
       }}</el-descriptions-item>
       <el-descriptions-item label="银行卡号" :span="2">{{
-        person.b_id
+        person.c_id_card
       }}</el-descriptions-item>
       <el-descriptions-item label="银行卡余额" :span="2"
         >{{ person.b_amount }}
@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { reqQueryUserInfo, reqChangePassword } from "@/api/index.js";
+import { reqQueryUserInfo, reqChangePassword,reqRecharge } from "@/api/index.js";
 export default {
   data() {
     return {
@@ -131,7 +131,6 @@ export default {
         c_id: 12,
         c_name: "kooriookami",
         c_phone: "18100000000",
-        b_id: "3269519184915",
         b_amount: 10000,
         c_password: "11111",
         c_id_card: "26519951159",
@@ -177,6 +176,17 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           // 执行充值逻辑
+          reqRecharge({
+            id : this.person.c_id_card,
+            amount : this.rechargeForm.amount
+          }).then((res) => {
+            if (res.data.code === "200") {
+              console.log("充值成功");
+            } else if (res.data.code === "404") {
+              console.log("充值失败");
+            }
+          }
+          );
           console.log("充值成功");
         }
       });
