@@ -49,8 +49,7 @@
         <el-table-column prop="f_type" label="基金类型" width="180">
         </el-table-column>
         <el-table-column prop="f_amount" label="基金金额"> </el-table-column>
-        <el-table-column prop="risk_level" label="风险等级">
-        </el-table-column>
+        <el-table-column prop="risk_level" label="风险等级"> </el-table-column>
         <el-table-column prop="type" label="操作">
           <template slot-scope="scope">
             <el-button size="mini" type="success" @click="handleBuy(scope.row)"
@@ -73,15 +72,7 @@ export default {
         name: "",
       },
       //table
-      tableData: [
-        {
-          f_id: 12,
-          f_name: "基金1",
-          f_type: "股票型",
-          f_amount: "1000",
-          risk_level: "高风险",
-        },
-      ],
+      tableData: [],
       //buy
       buyFormVisible: false,
       buyForm: {
@@ -107,7 +98,7 @@ export default {
       //查询所有已上线的基金
       reqQueryActiveFund()
         .then((res) => {
-          this.tableData = res.data.data
+          this.tableData = res.data.data;
         })
         .catch((err) => {
           console.log(err);
@@ -127,10 +118,10 @@ export default {
       console.log("buy " + this.buyForm.amount);
       console.log(this.fund);
       const params = {
-        u_id : sessionStorage.getItem("id"),
-        f_id : this.fund.f_id,
-        amount: this.buyForm.amount
-      } 
+        u_id: sessionStorage.getItem("id"),
+        f_id: this.fund.f_id,
+        amount: this.buyForm.amount,
+      };
       reqBuyFund(params)
         .then((res) => {
           console.log(res);

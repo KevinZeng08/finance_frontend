@@ -75,12 +75,13 @@
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="pro_name" label="资产名称" width="180">
         </el-table-column>
-        <el-table-column prop="pro_type" label="资产类型" width="180">
+        <el-table-column prop="pro_type_name" label="资产类型" width="180">
         </el-table-column>
         <el-table-column prop="pro_amount" label="资产金额"> </el-table-column>
         <el-table-column prop="pro_income" label="资产收益"> </el-table-column>
         <el-table-column prop="pro_status" label="资产状态"> </el-table-column>
-        <el-table-column prop="pro_purchase_time" label="买入时间"> </el-table-column>
+        <el-table-column prop="pro_purchase_time" label="买入时间">
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="mini" type="success" @click="handleBuy(scope.row)"
@@ -101,23 +102,12 @@
 </template>
 
 <script>
-import {reqQueryUserAsset} from '@/api/index'
+import { reqQueryUserAsset,reqBuyFund,reqBuyInsurance,reqBuyProduct } from "@/api/index";
 export default {
   data() {
     return {
       //table
-      tableData: [
-        {
-          pro_id: 1,
-          pro_name: "人工智能基金",
-          pro_type: "基金",
-          pro_amount: "1000",
-          pro_pif_id: "",
-          pro_income: "100",
-          pro_purchase_time: "",
-          pro_status: ""
-        },
-      ],
+      tableData: [],
       //search
       property: {},
       propertySearchForm: {
@@ -159,9 +149,57 @@ export default {
       //向后端发送请求
       console.log("buy " + this.buyForm.amount);
       console.log(this.property);
+      
+      //根据资产类型向后端发送请求
+      if(this.property.pro_type === 1){
+        console.log("buy product")
+        reqBuyProduct({
+          u_id: sessionStorage.getItem("id"),
+          p_id: this.property.pro_pif_id,
+          amount: this.buyForm.amount,
+        })
+        .then((res) => {
+          
+          this.handleBuyClose();
+          this.$message({
+            message: "买入成功",
+            type: "success",
+          });
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      } else if(this.property.pro_type === 2){
+        console.log("buy insurance")
+        reqBuyInsurance({
+          u_id: sessionStorage.getItem("id"),
+          i_id: this.property.pro_pif_id,
+          amount: this.buyForm.amount,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      } else {
+        console.log("buy fund")
+        reqBuyFund({
+          u_id: sessionStorage.getItem("id"),
+          f_id: this.property.pro_pif_id,
+          amount: this.buyForm.amount,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
 
       //刷新资产列表
-      const userid = sessionStorage.getItem("id")
+      const userid = sessionStorage.getItem("id");
       this.getPropertyList(userid);
     },
     //sell
@@ -179,25 +217,39 @@ export default {
       console.log(this.property);
 
       //刷新资产列表
-      const userid = sessionStorage.getItem("id")
+      const userid = sessionStorage.getItem("id");
       this.getPropertyList(userid);
     },
 
     //向后端请求指定用户资产列表
     getPropertyList(userid) {
       reqQueryUserAsset({
-        id : userid
-      }).then((res)=>{
-        this.tableData = res.data.data
+        id: userid,
       })
-      .catch((err)=>{
-        console.log(err)
-      })
+        .then((res) => {
+          const data = res.data.data;
+          this.tableData = data;
+          for (let i = 0; i < this.tableData.length; i++) {
+            if (data[i].pro_type === 1) {
+              this.tableData[i].pro_name = data[i].p_name;
+              this.tableData[i].pro_type_name = "理财产品";
+            } else if (data[i].pro_type === 2) {
+              this.tableData[i].pro_name = data[i].i_name;
+              this.tableData[i].pro_type_name = "保险";
+            } else {
+              this.tableData[i].pro_name = data[i].f_name;
+              this.tableData[i].pro_type_name = "基金";
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 
   mounted() {
-    const userid = sessionStorage.getItem("id")
+    const userid = sessionStorage.getItem("id");
     this.getPropertyList(userid);
   },
 };
