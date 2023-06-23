@@ -227,13 +227,14 @@ export default {
     getFund () {
       reqQueryAllFund().then((res) => {
         if (res.data.code === "200") {
+          // console.log(res.data.data)
           this.tableData = res.data.data
         } else if (res.data.code === "404") {
           console.log(res.data.msg)
         }
       })
         .catch((err) => {
-          console.log(err)
+          console.log('err:' + err)
         })
     },
   },
