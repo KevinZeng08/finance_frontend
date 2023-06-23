@@ -5,7 +5,10 @@
       <!-- form搜索区域 -->
       <el-form :inline="true" :model="userForm">
         <el-form-item>
-          <el-input placeholder="请输入名称" v-model="userForm.name"></el-input>
+          <el-input
+            placeholder="请输入持卡人名称"
+            v-model="userForm.name"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="search">查询</el-button>
@@ -13,7 +16,7 @@
       </el-form>
     </div>
     <template>
-      <el-table :data="tableData" style="width: 100%">
+      <el-table :data="filTableData" style="width: 100%">
         <el-table-column prop="c_id_card" label="身份证号" width="180">
         </el-table-column>
         <el-table-column prop="c_name" label="姓名" width="180">
@@ -34,6 +37,7 @@
         </el-table-column>
       </el-table>
     </template>
+    <!-- 分页 -->
     <div class="pagination-container w-100 text-center margin-top-20">
       <el-pagination small layout="prev, pager, next" :total="50">
       </el-pagination>
@@ -50,6 +54,15 @@ export default {
       userForm: {
         name: "",
       },
+    }
+  },
+  computed: {
+    //查询过滤出的数组
+    filTableData () {
+      const arr = this.tableData.filter((p) => {
+        return p.c_name.indexOf(this.userForm.name) != -1
+      })
+      return arr
     }
   },
   methods: {

@@ -74,11 +74,13 @@ export const reqDeleteFund = (params) => {
 }
 
 //保险删除
-export const reqDeleteInsurance = (params) => {
+export const reqDeleteInsurance = (i_id) => {
   return requests({
     url: `/admin/insurance/delete/`,
     method: "POST",
-    data: params,
+    query: {
+      id: i_id
+    }
   })
 }
 

@@ -16,7 +16,7 @@
     </div>
 
     <template>
-      <el-table :data="tableData" style="width: 100%">
+      <el-table :data="filTableData" style="width: 100%">
         <el-table-column prop="i_name" label="保险名称" width="180">
         </el-table-column>
         <el-table-column prop="i_year" label="保险年限"> </el-table-column>
@@ -39,7 +39,7 @@
 </template>
   
   <script>
-import { reqQueryAllInsurance } from '@/api'
+import { reqQueryAllInsurance, reqDeleteInsurance } from '@/api'
 export default {
   data () {
     return {
@@ -48,9 +48,16 @@ export default {
         name: "",
       },
       //table
-      tableData: '',
-      //row data
-      fund: {},
+      tableData: [],
+    }
+  },
+  computed: {
+    //查询过滤出的数组
+    filTableData () {
+      const arr = this.tableData.filter((p) => {
+        return p.i_name.indexOf(this.insuranceSearchForm.name) != -1
+      })
+      return arr
     }
   },
   methods: {
@@ -72,6 +79,19 @@ export default {
           console.log(err)
         })
     },
+    handleDelete (i) {
+      //删除某个理财产品
+      // reqDeleteInsurance(i.i_id).then((res) => {
+      //   if (res.data.code === '200') {
+      //     console.log('1')
+      //   } else if (res.data.code === "404") {
+      //     console.log(res.data.msg)
+      //   }
+      // }).catch((err) => {
+      //   console.log(err)
+      // })
+      console.log(i)
+    }
 
   },
   mounted () {

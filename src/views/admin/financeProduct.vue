@@ -2,9 +2,9 @@
   <div>
     <div class="manage-header">
       <!-- form搜索区域 -->
-      <el-form :inline="true" :model="userForm">
+      <el-form :inline="true" :model="Form">
         <el-form-item>
-          <el-input placeholder="请输入名称" v-model="userForm.name"></el-input>
+          <el-input placeholder="请输入名称" v-model="Form.name"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary">查询</el-button>
@@ -12,7 +12,7 @@
       </el-form>
     </div>
     <template>
-      <el-table :data="tableData" style="width: 100%">
+      <el-table :data="filTableData" style="width: 100%">
         <el-table-column prop="p_name" label="产品名称"> </el-table-column>
         <el-table-column prop="p_id" label="产品编号"> </el-table-column>
         <el-table-column prop="p_description" label="产品描述">
@@ -44,9 +44,18 @@ export default {
   data () {
     return {
       tableData: [],
-      userForm: {
+      Form: {
         name: "",
       },
+    }
+  },
+  computed: {
+    //查询过滤出的数组
+    filTableData () {
+      const arr = this.tableData.filter((p) => {
+        return p.p_name.indexOf(this.Form.name) != -1
+      })
+      return arr
     }
   },
   methods: {
@@ -63,8 +72,8 @@ export default {
       )
     },
 
-    handleDelete (index, row) {
-      console.log(index, row)
+    handleDelete (index) {
+      console.log(index)
     },
     queryProductInfo () {
       reqQueryProductInfo()
