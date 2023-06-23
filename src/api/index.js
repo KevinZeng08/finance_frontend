@@ -1,4 +1,5 @@
 //这个模块：对所有API统一管理
+import axios from "axios"
 import requests from "./request"
 
 //三级联动的接口  /api/product/getBaseCategoryList  get
@@ -51,25 +52,42 @@ export const reqQueryFundDetail = (params) => {
   return requests({
     url: `/admin/fund/detail/`,
     method: "GET",
-    params: { id: params.id },
+    params: { id: params },
   })
 }
 
 //基金增加
-export const reqAddFund = (params) => {
+export const reqAddFund = (query) => {
+  // return requests.post('/admin/fund/add/', )
+
+  // return requests.post('/admin/fund/add/', query) JSON
+
+  // let myForm = new FormData()
+  // myForm.append('f_name', query.f_name)
+  // myForm.append('f_id', query.f_id)
+  // return requests.post('/admin/fund/add/', myForm)
+
   return requests({
     url: "/admin/fund/add/",
     method: "POST",
-    data: params,
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    data: query
   })
 }
 
 //基金删除
-export const reqDeleteFund = (params) => {
+export const reqChangeFund = (params) => {
   return requests({
-    url: `/admin/fund/delete/`,
+    url: `/admin/fund/change/`,
     method: "POST",
-    data: params,
+    data: {
+      id: params.f_id,
+    },
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
   })
 }
 
@@ -78,7 +96,10 @@ export const reqDeleteInsurance = (i_id) => {
   return requests({
     url: `/admin/insurance/delete/`,
     method: "POST",
-    query: {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: {
       id: i_id
     }
   })

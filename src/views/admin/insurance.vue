@@ -80,17 +80,16 @@ export default {
         })
     },
     handleDelete (i) {
-      //删除某个理财产品
-      // reqDeleteInsurance(i.i_id).then((res) => {
-      //   if (res.data.code === '200') {
-      //     console.log('1')
-      //   } else if (res.data.code === "404") {
-      //     console.log(res.data.msg)
-      //   }
-      // }).catch((err) => {
-      //   console.log(err)
-      // })
-      console.log(i)
+      // 删除某个保险
+      reqDeleteInsurance(i.i_id).then((res) => {
+        if (res.data.code === '200') {
+          console.log('已删除' + i.i_name)
+        } else if (res.data.code === "404") {
+          console.log(res.data.msg)
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
     }
 
   },
