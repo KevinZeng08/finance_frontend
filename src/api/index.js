@@ -1,5 +1,4 @@
 //这个模块：对所有API统一管理
-import axios from "axios"
 import requests from "./request"
 
 //三级联动的接口  /api/product/getBaseCategoryList  get
@@ -70,10 +69,7 @@ export const reqAddFund = (query) => {
   return requests({
     url: "/admin/fund/add/",
     method: "POST",
-    headers: {
-      'content-type': 'application/x-www-form-urlencoded'
-    },
-    data: query
+    data: query,
   })
 }
 
@@ -121,16 +117,19 @@ export const reqChangePassword = (params) => {
   return requests({
     url: `/password/`,
     method: "POST",
-    data: params,
+    query: params,
   })
 }
 
 //用户银行卡充值
 export const reqRecharge = (params) => {
   return requests({
-    url: `/recharge/`,
+    url: `/card/recharge`,
     method: "POST",
-    query: params,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;",
+    },
+    data: params,
   })
 }
 
@@ -139,7 +138,7 @@ export const reqQueryUserAsset = (params) => {
   return requests({
     url: `/property/query/`,
     method: "GET",
-    params: params
+    params: params,
   })
 }
 
@@ -170,9 +169,36 @@ export const reqQueryActiveInsurance = () => {
 //用户购买基金
 export const reqBuyFund = (params) => {
   return requests({
-    url: `/fund/buy/`,
+    url: `/buy/fund`,
     method: "POST",
-    query: params,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;",
+    },
+    data: params,
+  })
+}
+
+//用户购买理财产品
+export const reqBuyProduct = (params) => {
+  return requests({
+    url: `/buy/product`,
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;",
+    },
+    data: params,
+  })
+}
+
+//用户购买保险
+export const reqBuyInsurance = (params) => {
+  return requests({
+    url: `/buy/insurance`,
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;",
+    },
+    data: params,
   })
 }
 
@@ -181,6 +207,9 @@ export const reqUserLogin = (params) => {
   return requests({
     url: `/login/`,
     method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;",
+    },
     data: params,
   })
 }

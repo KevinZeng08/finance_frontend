@@ -67,12 +67,12 @@ export default new VueRouter({
           component: UserFinanceProduct
         },
         {
-          name: 'userProperty',
+          name: 'userProperty', meta: { flag: 0 },
           path: 'property',   //我的资产
           component: UserProperty
         },
         {
-          name: 'userInsurance',
+          name: 'userInsurance', meta: { flag: 0 },
           path: 'insurance',   //我的保险
           component: UserInsurance
         }

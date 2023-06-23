@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { reqQueryActiveProduct } from "@/api/index";
+import { reqQueryActiveProduct, reqBuyProduct } from "@/api/index";
 export default {
   data() {
     return {
@@ -73,23 +73,14 @@ export default {
         name: "",
       },
       //table
-      tableData: [
-        {
-          p_id: 12,
-          p_name: "3年期存款产品",
-          p_year: 3,
-          p_amount: 1520,
-          p_rate: 2.5,
-          p_description: "这是一款3年期的存款理财产品",
-        },
-      ],
+      tableData: [],
       //buy
       buyFormVisible: false,
       buyForm: {
         amount: 100,
       },
       //row data
-      fund: {},
+      product: {},
       // other
       rules: {
         amount: [
@@ -122,7 +113,25 @@ export default {
     buy() {
       //向后端发送请求
       console.log("buy " + this.buyForm.amount);
-      console.log(this.fund);
+      console.log(this.product);
+
+      const params = {
+        u_id: sessionStorage.getItem("id"),
+        p_id: this.product.p_id,
+        amount: this.buyForm.amount,
+      };
+      reqBuyProduct(params)
+        .then((res) => {
+          console.log(res);
+          this.$message({
+            message: "买入成功",
+            type: "success",
+          });
+          this.handleBuyClose();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   mounted() {

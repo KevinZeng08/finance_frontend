@@ -7,7 +7,7 @@
       width="30%"
       :before-close="handleClose"
     >
-      <!-- 买入表单信息 -->
+      <!-- 密码秀嘎哎 -->
       <el-form
         ref="form"
         :rules="rules"
@@ -15,6 +15,12 @@
         :model="form"
         label-width="80px"
       >
+        <el-form-item label="旧密码" prop="oldPassword">
+          <el-input
+            placeholder="请输入旧密码"
+            v-model="form.oldPassword"
+          ></el-input>
+        </el-form-item>
         <el-form-item label="新密码" prop="password">
           <el-input
             placeholder="请输入新密码"
@@ -31,7 +37,7 @@
 
     <!-- 银行卡余额充值 -->
     <el-dialog
-      title="修改密码"
+      title="银行卡充值"
       :visible.sync="rechargeVisible"
       width="30%"
       :before-close="handleRechargeClose"
@@ -69,8 +75,11 @@
       <el-descriptions-item label="手机号">{{
         person.c_phone
       }}</el-descriptions-item>
-      <el-descriptions-item label="银行卡号" :span="2">{{
-        person.c_id_card
+      <el-descriptions-item label="银行卡号">{{
+        person.b_id
+      }}</el-descriptions-item>
+      <el-descriptions-item label="银行卡类型">{{
+        person.b_type
       }}</el-descriptions-item>
       <el-descriptions-item label="银行卡余额" :span="2"
         >{{ person.b_amount }}
@@ -87,7 +96,7 @@
       <el-descriptions-item label="电子邮箱">{{
         person.c_mail
       }}</el-descriptions-item>
-            <el-descriptions-item label="用户类型">{{
+      <el-descriptions-item label="用户类型">{{
         person.c_type
       }}</el-descriptions-item>
     </el-descriptions>
@@ -95,7 +104,11 @@
 </template>
 
 <script>
-import { reqQueryUserInfo, reqChangePassword,reqRecharge } from "@/api/index.js";
+import {
+  reqQueryUserInfo,
+  reqChangePassword,
+  reqRecharge,
+} from "@/api/index.js";
 export default {
   data() {
     return {
@@ -103,9 +116,19 @@ export default {
       dialogVisible: false,
       form: {
         password: "",
+        oldPassword: "",
       },
       rules: {
         password: [
+          { required: true, message: "请输入新密码", trigger: "blur" },
+          {
+            min: 6,
+            max: 20,
+            message: "长度在 6 到 20 个字符",
+            trigger: "blur",
+          },
+        ],
+        oldPassword: [
           { required: true, message: "请输入新密码", trigger: "blur" },
           {
             min: 6,
@@ -123,21 +146,15 @@ export default {
       rechargeRules: {
         amount: [
           { required: true, message: "请输入充值金额", trigger: "blur" },
-          {pattern: /^\d+(\.\d+)?$/, message: "请输入有效的数字", trigger: "blur"}
+          {
+            pattern: /^\d+(\.\d+)?$/,
+            message: "请输入有效的数字",
+            trigger: "blur",
+          },
         ],
       },
       //person info
-      person: {
-        c_id: 12,
-        c_name: "kooriookami",
-        c_phone: "18100000000",
-        b_amount: 10000,
-        c_password: "11111",
-        c_id_card: "26519951159",
-        c_age: "22",
-        c_mail: "kevin08@qq.com",
-        c_type: ""
-      },
+      person: {},
     };
   },
 
@@ -151,20 +168,17 @@ export default {
           // 更改密码
           reqChangePassword({
             id: this.person.c_id,
-            password: this.person.c_password,
+            pwd: this.form.oldPassword,
+            new_pwd: this.form.password,
           }).then((res) => {
             if (res.data.code === "200") {
               console.log("修改密码成功");
             } else if (res.data.code === "404") {
               console.log("修改密码失败");
             }
-          }
-          );
-          console.log("修改密码成功");
+          });
         }
       });
-      this.person.c_password = "123456";
-      //根据person的id发送请求更新密码的请求
     },
 
     //recharge
@@ -177,17 +191,23 @@ export default {
         if (valid) {
           // 执行充值逻辑
           reqRecharge({
-            id : this.person.c_id_card,
-            amount : this.rechargeForm.amount
+            id: this.person.b_id,
+            amount: this.rechargeForm.amount,
           }).then((res) => {
             if (res.data.code === "200") {
-              console.log("充值成功");
+              this.queryUserInfo();
+              this.handleRechargeClose();
+              this.$message({
+                message: "充值成功",
+                type: "success",
+              });
             } else if (res.data.code === "404") {
-              console.log("充值失败");
+              this.$message({
+                message: res.data.msg,
+                type: "error",
+              });
             }
-          }
-          );
-          console.log("充值成功");
+          });
         }
       });
     },
@@ -200,10 +220,9 @@ export default {
         id: userid,
       })
         .then((res) => {
-          if(res.data.code === "200") {
-            console.log(res.data);
+          if (res.data.code === "200") {
             this.person = res.data.data;
-          } else if(res.data.code === "404") {
+          } else if (res.data.code === "404") {
             console.log(res.data.msg);
           }
         })
