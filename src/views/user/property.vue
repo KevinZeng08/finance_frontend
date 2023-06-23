@@ -102,7 +102,12 @@
 </template>
 
 <script>
-import { reqQueryUserAsset,reqBuyFund,reqBuyInsurance,reqBuyProduct } from "@/api/index";
+import {
+  reqQueryUserAsset,
+  reqBuyFund,
+  reqBuyInsurance,
+  reqBuyProduct,
+} from "@/api/index";
 export default {
   data() {
     return {
@@ -149,53 +154,98 @@ export default {
       //向后端发送请求
       console.log("buy " + this.buyForm.amount);
       console.log(this.property);
-      
+
+      let params = {};
       //根据资产类型向后端发送请求
-      if(this.property.pro_type === 1){
-        console.log("buy product")
-        reqBuyProduct({
-          u_id: sessionStorage.getItem("id"),
+      if (this.property.pro_type === 1) {
+        console.log("buy product");
+        const userid = sessionStorage.getItem("id"),
+        params = {
+          u_id: userid,
           p_id: this.property.pro_pif_id,
           amount: this.buyForm.amount,
-        })
-        .then((res) => {
-          
-          this.handleBuyClose();
-          this.$message({
-            message: "买入成功",
-            type: "success",
-          });
+        };
 
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      } else if(this.property.pro_type === 2){
-        console.log("buy insurance")
-        reqBuyInsurance({
-          u_id: sessionStorage.getItem("id"),
+        reqBuyProduct(params)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.code === "200") {
+              this.$message({
+                message: "买入成功",
+                type: "success",
+              });
+              this.handleBuyClose();
+            } else if (res.data.code === "404") {
+              this.$message({
+                message: res.data.data,
+                type: "error",
+              });
+              this.handleBuyClose();
+            }
+            this.getPropertyList(userid);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else if (this.property.pro_type === 2) {
+        console.log("buy insurance");
+        const userid = sessionStorage.getItem("id"),
+        params = {
+          u_id: userid,
           i_id: this.property.pro_pif_id,
           amount: this.buyForm.amount,
-        })
+        }
+        reqBuyInsurance(params)
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
+          if (res.data.code === "200") {
+            this.$message({
+              message: "买入成功",
+              type: "success",
+            });
+            this.handleBuyClose();
+          } else if (res.data.code === "404") {
+            this.$message({
+              message: res.data.data,
+              type: "error",
+            });
+            this.handleBuyClose();
+          }
+          this.getPropertyList(userid);
         })
         .catch((err) => {
           console.log(err);
         });
+
       } else {
-        console.log("buy fund")
-        reqBuyFund({
-          u_id: sessionStorage.getItem("id"),
+        console.log("buy fund");
+        const userid =  sessionStorage.getItem("id")
+        params = {         
+          u_id : userid,
           f_id: this.property.pro_pif_id,
-          amount: this.buyForm.amount,
-        })
+          amount: this.buyForm.amount,}
+        reqBuyFund(params)
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
+          if (res.data.code === "200") {
+            this.$message({
+              message: "买入成功",
+              type: "success",
+            });
+            this.handleBuyClose();
+          } else if (res.data.code === "404") {
+            this.$message({
+              message: res.data.data,
+              type: "error",
+            });
+            this.handleBuyClose();
+          }
+          this.getPropertyList(userid);
         })
         .catch((err) => {
           console.log(err);
         });
+       
       }
 
       //刷新资产列表

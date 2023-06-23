@@ -215,7 +215,6 @@ export default {
     queryUserInfo() {
       //根据用户id查询用户信息
       const userid = sessionStorage.getItem("id");
-      console.log(userid + "---");
       reqQueryUserInfo({
         id: userid,
       })

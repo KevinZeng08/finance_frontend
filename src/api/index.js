@@ -208,7 +208,7 @@ export const reqBuyInsurance = (params) => {
 //用户登录
 export const reqUserLogin = (params) => {
   return requests({
-    url: `/login/`,
+    url: `/login`,
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;",

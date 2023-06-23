@@ -101,27 +101,9 @@ export default {
       });
     },
     //buy
-    handleBuy(fund) {
+    handleBuy(insurance) {
       this.buyFormVisible = true;
-      this.fund = fund;
-
-      const params = {
-        u_id: sessionStorage.getItem("id"),
-        i_id: this.insurance.i_id,
-        amount: this.buyForm.amount,
-      };
-      reqBuyInsurance(params)
-        .then((res) => {
-          console.log(res);
-          this.$message({
-            message: "买入成功",
-            type: "success",
-          });
-          this.handleBuyClose();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.insurance = insurance;
     },
     handleBuyClose() {
       this.$refs["form"].resetFields();
@@ -131,6 +113,33 @@ export default {
       //向后端发送请求
       console.log("buy " + this.buyForm.amount);
       console.log(this.insurance);
+
+      const params = {
+        u_id: sessionStorage.getItem("id"),
+        i_id: this.insurance.i_id,
+        amount: this.buyForm.amount,
+      };
+      reqBuyInsurance(params)
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.code === "200") {
+            this.$message({
+              message: "买入成功",
+              type: "success",
+            });
+            this.handleBuyClose();
+          } else if (res.data.code === "404") {
+            this.$message({
+              message: res.data.data,
+              type: "error",
+            });
+            this.handleBuyClose();
+          }
+          this.getActiveInsurances();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   mounted() {

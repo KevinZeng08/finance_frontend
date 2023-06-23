@@ -34,18 +34,23 @@ export default {
     //登录
     sumbit () {
       if (this.type === "1") {
-        // reqUserLogin(this.form).then((res)=>{
-        //   if(res.data.code === "200") {
-        //     sessionStorage.setItem('id', res.data.data.id)
-        //     this.$router.push({ name: 'userHome' })
-        //   }
-        // })
-        this.$router.push({ name: 'userHome' })
+        reqUserLogin(this.form).then((res)=>{
+          if(res.data.code === "200") {
+            sessionStorage.setItem('id', res.data.data[0].c_id)
+            this.$router.push({ name: 'userHome' })
+          }
+          else if(res.data.code === "404") {
+            this.$message({
+              message: res.data.data,
+              type: 'error'
+            })
+          }
+        })
+        
       }
       if (this.type === "2") {
         this.$router.push({ name: 'admin' })
       }
-      sessionStorage.setItem('id', 5)
     }
   },
   data () {
