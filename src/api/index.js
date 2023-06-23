@@ -69,6 +69,9 @@ export const reqAddFund = (query) => {
   return requests({
     url: "/admin/fund/add/",
     method: "POST",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
     data: query,
   })
 }
