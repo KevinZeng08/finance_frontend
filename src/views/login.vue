@@ -28,17 +28,24 @@
 </template>
 
 <script>
+import {reqUserLogin} from "@/api/index";
 export default {
   methods: {
     //登录
     sumbit () {
       if (this.type === "1") {
-        this.$router.push({ name: 'userHome' })
+        reqUserLogin(this.form).then((res)=>{
+          if(res.data.code === "200") {
+            sessionStorage.setItem('id', res.data.data.id)
+            this.$router.push({ name: 'userHome' })
+          }
+        })
+        
       }
       if (this.type === "2") {
         this.$router.push({ name: 'admin' })
       }
-      sessionStorage.setItem('id', 1)
+      sessionStorage.setItem('id', 5)
     }
   },
   data () {

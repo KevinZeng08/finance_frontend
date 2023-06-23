@@ -73,12 +73,14 @@
 
     <template>
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="name" label="资产名称" width="180">
+        <el-table-column prop="pro_name" label="资产名称" width="180">
         </el-table-column>
-        <el-table-column prop="type" label="资产类型" width="180">
+        <el-table-column prop="pro_type" label="资产类型" width="180">
         </el-table-column>
-        <el-table-column prop="amount" label="资产金额"> </el-table-column>
-        <el-table-column prop="income" label="资产收益"> </el-table-column>
+        <el-table-column prop="pro_amount" label="资产金额"> </el-table-column>
+        <el-table-column prop="pro_income" label="资产收益"> </el-table-column>
+        <el-table-column prop="pro_status" label="资产状态"> </el-table-column>
+        <el-table-column prop="pro_purchase_time" label="买入时间"> </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="mini" type="success" @click="handleBuy(scope.row)"
@@ -99,17 +101,21 @@
 </template>
 
 <script>
+import {reqQueryUserAsset} from '@/api/index'
 export default {
   data() {
     return {
       //table
       tableData: [
         {
-          id: 1,
-          name: "人工智能基金",
-          type: "基金",
-          amount: "1000",
-          income: "100",
+          pro_id: 1,
+          pro_name: "人工智能基金",
+          pro_type: "基金",
+          pro_amount: "1000",
+          pro_pif_id: "",
+          pro_income: "100",
+          pro_purchase_time: "",
+          pro_status: ""
         },
       ],
       //search
@@ -155,7 +161,8 @@ export default {
       console.log(this.property);
 
       //刷新资产列表
-      this.getPropertyList();
+      const userid = sessionStorage.getItem("id")
+      this.getPropertyList(userid);
     },
     //sell
     handleSell(property) {
@@ -172,15 +179,26 @@ export default {
       console.log(this.property);
 
       //刷新资产列表
-      this.getPropertyList();
+      const userid = sessionStorage.getItem("id")
+      this.getPropertyList(userid);
     },
 
     //向后端请求指定用户资产列表
-    getPropertyList() {},
+    getPropertyList(userid) {
+      reqQueryUserAsset({
+        id : userid
+      }).then((res)=>{
+        this.tableData = res.data.data
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
   },
 
   mounted() {
-    this.getPropertyList();
+    const userid = sessionStorage.getItem("id")
+    this.getPropertyList(userid);
   },
 };
 </script>

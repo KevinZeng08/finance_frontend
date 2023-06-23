@@ -4,7 +4,10 @@
       <!-- form搜索区域 -->
       <el-form :inline="true" :model="productSearchForm">
         <el-form-item>
-          <el-input placeholder="请输入理财产品名称" v-model="productSearchForm.name"></el-input>
+          <el-input
+            placeholder="请输入理财产品名称"
+            v-model="productSearchForm.name"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="searchProduct">查询</el-button>
@@ -43,12 +46,11 @@
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="p_name" label="理财产品名称" width="180">
         </el-table-column>
-        <el-table-column prop="p_year" label="理财年限">
-        </el-table-column>
-        <el-table-column prop="p_rate" label="年利率">
-        </el-table-column>
+        <el-table-column prop="p_year" label="理财年限"> </el-table-column>
+        <el-table-column prop="p_rate" label="年利率"> </el-table-column>
         <el-table-column prop="p_amount" label="购买金额"> </el-table-column>
-        <el-table-column prop="p_description" label="产品描述"> </el-table-column>
+        <el-table-column prop="p_description" label="产品描述">
+        </el-table-column>
         <el-table-column prop="type" label="操作">
           <template slot-scope="scope">
             <el-button size="mini" type="success" @click="handleBuy(scope.row)"
@@ -62,6 +64,7 @@
 </template>
 
 <script>
+import { reqQueryActiveProduct } from "@/api/index";
 export default {
   data() {
     return {
@@ -91,19 +94,21 @@ export default {
       rules: {
         amount: [
           { required: true, message: "请输入买入金额", trigger: "blur" },
-          
         ],
       },
     };
   },
   methods: {
     //search
-    searchProduct(){
+    searchProduct() {
       //条件查询基金
-      console.log(this.productSearchForm.name)
+      console.log(this.productSearchForm.name);
     },
     getActiveProducts() {
       //查询所有理财产品
+      reqQueryActiveProduct().then((res) => {
+        this.tableData = res.data.data;
+      });
     },
     //buy
     handleBuy(fund) {
