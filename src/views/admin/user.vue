@@ -17,11 +17,11 @@
     </div>
     <template>
       <el-table :data="filTableData" style="width: 100%">
-        <el-table-column prop="c_id_card" label="身份证号" width="180">
+        <el-table-column prop="c_id_card" label="身份证号" width="210">
         </el-table-column>
-        <el-table-column prop="c_name" label="姓名" width="180">
+        <el-table-column prop="c_name" label="姓名" width="120">
         </el-table-column>
-        <el-table-column prop="c_id_card" label="银行卡号" width="180">
+        <el-table-column prop="c_id_card" label="银行卡号" width="210">
         </el-table-column>
         <el-table-column prop="c_phone" label="手机号"> </el-table-column>
         <el-table-column prop="c_type" label="类型"> </el-table-column>

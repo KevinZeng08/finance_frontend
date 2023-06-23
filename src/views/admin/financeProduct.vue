@@ -13,12 +13,16 @@
     </div>
     <template>
       <el-table :data="filTableData" style="width: 100%">
-        <el-table-column prop="p_name" label="产品名称"> </el-table-column>
-        <el-table-column prop="p_id" label="产品编号"> </el-table-column>
-        <el-table-column prop="p_description" label="产品描述">
+        <el-table-column prop="p_name" label="产品名称" width="150">
         </el-table-column>
-        <el-table-column prop="p_amount" label="购买金额"> </el-table-column>
-        <el-table-column prop="p_year" label="理财年限"> </el-table-column>
+        <el-table-column prop="p_id" label="产品编号" width="150">
+        </el-table-column>
+        <el-table-column prop="p_description" label="产品描述" width="420">
+        </el-table-column>
+        <el-table-column prop="p_amount" label="购买金额" width="150">
+        </el-table-column>
+        <el-table-column prop="p_year" label="理财年限" width="150">
+        </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button

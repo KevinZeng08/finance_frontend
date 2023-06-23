@@ -11,7 +11,7 @@
     >
       <el-descriptions
         class="margin-top"
-        title="xx基金详情"
+        :title="detailData.f_name"
         :column="2"
         :size="size"
         border
@@ -198,6 +198,7 @@ export default {
       reqAddFund(this.form).then((res) => {
         if (res.data.code === "200") {
           console.log("success")
+          this.getList()
         } else if (res.data.code === "404") {
           console.log('msg:' + res.data.msg)
         }
@@ -205,12 +206,14 @@ export default {
         .catch((err) => {
           console.log('err:' + err)
         })
+      this.getList()
     },
-    //基金上下线
+    //基金上/下线
     changeState (item) {
       reqChangeFund(item).then((res) => {
         if (res.data.code === "200") {
           console.log("success")
+          this.getList()
         } else if (res.data.code === "404") {
           console.log('msg:' + res.data.msg)
         }
@@ -266,11 +269,6 @@ export default {
     },
     handleDetailClose () {
       this.detailVisible = false
-    },
-
-    //获取基金详情
-    getFund () {
-
     },
   },
 

@@ -17,8 +17,7 @@
 
     <template>
       <el-table :data="filTableData" style="width: 100%">
-        <el-table-column prop="i_name" label="保险名称" width="180">
-        </el-table-column>
+        <el-table-column prop="i_name" label="保险名称"> </el-table-column>
         <el-table-column prop="i_year" label="保险年限"> </el-table-column>
         <el-table-column prop="i_amount" label="保险金额"> </el-table-column>
         <el-table-column prop="i_person" label="适用人群"> </el-table-column>
@@ -63,11 +62,11 @@ export default {
   methods: {
     //search
     searchInsurance () {
-      //条件查询基金
+      //条件查询保险
       console.log(this.insuranceSearchForm.name)
     },
     getInsuranceList () {
-      //查询所有理财产品
+      //查询所有保险
       reqQueryAllInsurance().then((res) => {
         if (res.data.code === "200") {
           this.tableData = res.data.data
@@ -80,10 +79,11 @@ export default {
         })
     },
     handleDelete (i) {
-      // 删除某个保险
+      // 删除保险
       reqDeleteInsurance(i.i_id).then((res) => {
         if (res.data.code === '200') {
           console.log('已删除' + i.i_name)
+          this.getInsuranceList()
         } else if (res.data.code === "404") {
           console.log(res.data.msg)
         }
