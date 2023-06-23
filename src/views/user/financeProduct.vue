@@ -102,9 +102,9 @@ export default {
       });
     },
     //buy
-    handleBuy(fund) {
+    handleBuy(product) {
       this.buyFormVisible = true;
-      this.fund = fund;
+      this.product = product;
     },
     handleBuyClose() {
       this.$refs["form"].resetFields();
@@ -122,12 +122,20 @@ export default {
       };
       reqBuyProduct(params)
         .then((res) => {
-          console.log(res);
-          this.$message({
-            message: "买入成功",
-            type: "success",
-          });
-          this.handleBuyClose();
+          if (res.data.code === "200") {
+            this.$message({
+              message: "买入成功",
+              type: "success",
+            });
+            this.handleBuyClose();
+          } else if (res.data.code === "404") {
+            this.$message({
+              message: res.data.data,
+              type: "error",
+            });
+            this.handleBuyClose();
+          }
+          this.getActiveProducts();
         })
         .catch((err) => {
           console.log(err);

@@ -124,12 +124,21 @@ export default {
       };
       reqBuyFund(params)
         .then((res) => {
-          console.log(res);
-          this.$message({
-            message: "买入成功",
-            type: "success",
-          });
-          this.handleBuyClose();
+          console.log(res.data);
+          if (res.data.code === "200") {
+            this.$message({
+              message: "买入成功",
+              type: "success",
+            });
+            this.handleBuyClose();
+          } else if (res.data.code === "404") {
+            this.$message({
+              message: res.data.data,
+              type: "error",
+            });
+            this.handleBuyClose();
+          }
+          this.getActiveFunds();
         })
         .catch((err) => {
           console.log(err);
