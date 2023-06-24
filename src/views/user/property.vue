@@ -16,7 +16,7 @@
     </div>
 
     <el-dialog
-      title="基金买入"
+      title="资产买入"
       :visible.sync="buyFormVisible"
       width="30%"
       :before-close="handleBuyClose"
