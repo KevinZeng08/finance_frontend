@@ -198,6 +198,7 @@ export default {
       reqAddFund(this.form).then((res) => {
         if (res.data.code === "200") {
           console.log("success")
+          this.handleClose()
           this.getList()
         } else if (res.data.code === "404") {
           console.log('msg:' + res.data.msg)
@@ -206,6 +207,7 @@ export default {
         .catch((err) => {
           console.log('err:' + err)
         })
+        this.handleClose()
       this.getList()
     },
     //基金上/下线

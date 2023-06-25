@@ -127,7 +127,7 @@ export const reqChangePassword = (params) => {
 //用户银行卡充值
 export const reqRecharge = (params) => {
   return requests({
-    url: `/card/recharge`,
+    url: `/card/recharge/`,
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;",
@@ -172,7 +172,7 @@ export const reqQueryActiveInsurance = () => {
 //用户购买基金
 export const reqBuyFund = (params) => {
   return requests({
-    url: `/buy/fund`,
+    url: `/buy/fund/`,
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;",
@@ -184,7 +184,7 @@ export const reqBuyFund = (params) => {
 //用户购买理财产品
 export const reqBuyProduct = (params) => {
   return requests({
-    url: `/buy/product`,
+    url: `/buy/product/`,
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;",
@@ -196,7 +196,7 @@ export const reqBuyProduct = (params) => {
 //用户购买保险
 export const reqBuyInsurance = (params) => {
   return requests({
-    url: `/buy/insurance`,
+    url: `/buy/insurance/`,
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;",
@@ -208,7 +208,7 @@ export const reqBuyInsurance = (params) => {
 //用户登录
 export const reqUserLogin = (params) => {
   return requests({
-    url: `/login`,
+    url: `/login/`,
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;",
